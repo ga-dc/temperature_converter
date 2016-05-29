@@ -4,6 +4,7 @@
 
   /**
    * Prompt the user for a numerical value of temperature.
+   * @return {Number} a numerical value of temperature.
    */
   function propmtTemperature() {
 
@@ -31,12 +32,17 @@
     return temperature;
   }
 
+  /**
+   * @param  {Number}  a numeric value of temperature.
+   * @return {Boolean} true if the temperature is valid, else false.
+   */
   function isValidTemperature( temperature ) {
     return Number( temperature ); // True if it's not NaN.
   }
 
   /**
    * Prompt the user for a unit of temperature.
+   * @return {String} a unit of temperature.
    */
   function propmtUnit() {
 
@@ -54,39 +60,80 @@
       } else {
         promptMsg = "The unit must be F (Fahrenheit), C (Celsius) or K (Kelvin)."
       }
-    }
+    } // endwhile
 
-    return unit;
+    // Standardize on lowercase letter.
+    return unit.toLowerCase();
   }
 
+  /**
+   * @param  {String}  a unit of temperature.
+   * @return {Boolean} true if the unit is valid, else false.
+   */
   function isValidUnit( unit ) {
     return unit.length === 1 && /^[FCK]$/i.test( unit )
   }
 
-  var temperature = propmtTemperature();
-  var unit = propmtUnit();
+  // conversion table
+  // http://www.allmeasures.com/temperature.html
+  // F => C | (F - 32) * 5/9
+  // F => K | (F - 32) * 5/9 + 273.15
+  // C => F | (C * 9/5) + 32
+  // C => K | C + 273.15
+  // K => F | (K - 273.15) * 9/5 + 32
+  // K => C | K - 273.15
+  var converters = {
+    'f': {
+      'c': function(T) { return (T - 32) * 5/9; },
+      'k': function(T) { return (T - 32) * 5/9 + 273.15; }
+    },
+    'c': {
+      'f': function(T) { return (T * 9/5) + 32; },
+      'k': function(T) { return T + 273.15; }
+    },
+    'k': {
+      'f': function(T) { return (T - 273.15) * 9/5 + 32; },
+      'c': function(T) { return T - 273.15; }
+    }
+  }
 
-  console.log('Temperature:', temperature);
-  console.log('Unit:', unit);
+  /**
+   * @param  {[Number]} numericalValue
+   * @param  {[String]} fromUnit
+   * @param  {[String]} toUnit
+   * @return {[Number]} a numerical value of the conversion result.
+   */
+  function convertTemperature( numericalValue, fromUnit, toUnit ) {
+    return converters[ fromUnit ][ toUnit ]( numericalValue );
+  }
 
-  // /**
-  //  * Convert temperature from fahrenheit to kelvin.
-  //  * @param  {Number} temparature in fahrenheit
-  //  * @return {Number} temparature in kelvin
-  //  */
-  // function fahrenheit2kelvin( fahrenheit ) {
-  //   return ( fahrenheit + 459.67 ) * 5 / 9;
-  // }
-  //
-  // /**
-  //  * Log the specified temperature in both kelvin and fahrenheit.
-  //  * @param  {Number} temparature in fahrenheit
-  //  */
-  // function logTemperature( fahrenheit ) {
-  //   console.log( 'Fahrenheit: ', fahrenheit );
-  //   console.log( 'Kelvin:     ', fahrenheit2kelvin( fahrenheit ));
-  // }
-  //
-  // // Execute the program.
-  // logTemperature( propmtFahrenheit() );
+  /**
+   * @param  {[Number]} numericalValue
+   * @param  {[String]} fromUnit
+   * @return {[Array]}
+   */
+  function getTemperatureList( numericalValue, fromUnit ) {
+
+    var units = [ 'f', 'c', 'k' ];
+
+    return units.map( function( unit ) {
+      var tmp = [];
+      if ( unit === fromUnit ) {
+        tmp.push( numericalValue );
+        tmp.push( unit );
+        return tmp;
+      } else {
+        tmp.push( convertTemperature( numericalValue, fromUnit, unit ) );
+        tmp.push( unit );
+        return tmp;
+      }
+    });
+  }
+
+  // Execute the program.
+  var temperatureList = getTemperatureList( propmtTemperature(), propmtUnit() );
+  temperatureList.forEach( function( item ) {
+    console.log( item[ 0 ] + item[ 1 ] );
+  });
+
 })();
