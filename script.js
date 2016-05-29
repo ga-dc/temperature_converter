@@ -1,51 +1,92 @@
 "user strict";
 
-(function(){
+(function() {
 
   /**
-   * Prompt the user for a starting temperatureInFahr.
-   * This should be a numerical value that represents degrees in fahrenheit.
+   * Prompt the user for a numerical value of temperature.
    */
-  function propmtFahrenheit() {
+  function propmtTemperature() {
 
-    var promptMsg = "Please enter a temperature in Fahrenheit";
-    var isValid   = false;
+    var promptMsg = "Please enter a numerical value of temperature";
 
+    // Repeat until we get a valid value.
+    var isValid = false;
     while ( ! isValid ) {
-      var temperatureInFahr = prompt( promptMsg );
 
-      // Convert the String input into a number
-      temperatureInFahr = Number( temperatureInFahr );
+      // Obtain the temperature from the user.
+      var temperature = prompt( promptMsg );
 
-      // Repeat if it is `NaN`.
-      if ( Number( temperatureInFahr ) ) {
+      // Convert the String input into a number.
+      temperature = Number( temperature );
+
+      // Validate the input.
+      // Invalid if it is `NaN`.
+      if ( isValidTemperature( temperature ) ) {
         isValid = true;
       } else {
         promptMsg = "The temperature value must be a number."
       }
     }
 
-    return temperatureInFahr;
+    return temperature;
+  }
+
+  function isValidTemperature( temperature ) {
+    return Number( temperature ); // True if it's not NaN.
   }
 
   /**
-   * Convert temperature from fahrenheit to kelvin.
-   * @param  {Number} temparature in fahrenheit
-   * @return {Number} temparature in kelvin
+   * Prompt the user for a unit of temperature.
    */
-  function fahrenheit2kelvin( fahrenheit ) {
-    return ( fahrenheit + 459.67 ) * 5 / 9;
+  function propmtUnit() {
+
+    var promptMsg = "Please enter the unit of temperature,\nF (Fahrenheit), C (Celsius) or K (Kelvin)";
+
+    var isValid = false;
+    while ( ! isValid ) {
+
+      // Obtain the temperature from the user.
+      var unit = prompt( promptMsg );
+
+      // Validate the input.
+      if ( isValidUnit( unit ) ) {
+        isValid = true;
+      } else {
+        promptMsg = "The unit must be F (Fahrenheit), C (Celsius) or K (Kelvin)."
+      }
+    }
+
+    return unit;
   }
 
-  /**
-   * Log the specified temperature in both kelvin and fahrenheit.
-   * @param  {Number} temparature in fahrenheit
-   */
-  function logTemperature( fahrenheit ) {
-    console.log( 'Fahrenheit: ', fahrenheit );
-    console.log( 'Kelvin:     ', fahrenheit2kelvin( fahrenheit ));
+  function isValidUnit( unit ) {
+    return unit.length === 1 && /^[FCK]$/i.test( unit )
   }
 
-  // Execute the program.
-  logTemperature( propmtFahrenheit() );
+  var temperature = propmtTemperature();
+  var unit = propmtUnit();
+
+  console.log('Temperature:', temperature);
+  console.log('Unit:', unit);
+
+  // /**
+  //  * Convert temperature from fahrenheit to kelvin.
+  //  * @param  {Number} temparature in fahrenheit
+  //  * @return {Number} temparature in kelvin
+  //  */
+  // function fahrenheit2kelvin( fahrenheit ) {
+  //   return ( fahrenheit + 459.67 ) * 5 / 9;
+  // }
+  //
+  // /**
+  //  * Log the specified temperature in both kelvin and fahrenheit.
+  //  * @param  {Number} temparature in fahrenheit
+  //  */
+  // function logTemperature( fahrenheit ) {
+  //   console.log( 'Fahrenheit: ', fahrenheit );
+  //   console.log( 'Kelvin:     ', fahrenheit2kelvin( fahrenheit ));
+  // }
+  //
+  // // Execute the program.
+  // logTemperature( propmtFahrenheit() );
 })();
