@@ -9,6 +9,7 @@
 
   // Conversion table.
   // http://www.allmeasures.com/temperature.html
+  // NOTE: The value must be a Number, not a String.
   // F => C | (F - 32) * 5/9
   // F => K | (F - 32) * 5/9 + 273.15
   // C => F | (C * 9/5) + 32
@@ -39,12 +40,13 @@
   }
 
   /**
-   * @param  {[Number]} numericalValue
+   * @param  {[Number]} numericalValue (NOTE: Should not be a string.)
    * @param  {[String]} fromUnit
    * @param  {[String]} toUnit
    * @return {[Number]} a numerical value of the conversion result.
    */
   function convertTemperature( numericalValue, fromUnit, toUnit ) {
+    numericalValue = Number( numericalValue );
     return converters[ fromUnit ][ toUnit ]( numericalValue );
   }
 
@@ -113,7 +115,8 @@
 
           // Create a new table data element.
           var tableData = document.createElement('td');
-          tableData.textContent = item[ 0 ] + item[ 1 ];
+          tableData.textContent = item[ 0 ];
+          // tableData.textContent = item[ 0 ] + item[ 1 ];
           tableRow.appendChild( tableData );
         });
 
