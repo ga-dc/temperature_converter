@@ -3,23 +3,43 @@
 <head>
   <meta charset="UTF-8">
   <title>Temperature Converter</title>
+
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h1>
-    Temperature Converter
-  </h1>
 
-  <ul>
-    <li>
-      Prompt the user for a starting temperature. This should be a numerical value that represents degrees.
-    </li>
-    <li>
-      Prompt the user for a starting temperature_unit. This will represent either Fahrenheit, Celsius or Kelvin.
-    </li>
-    <li>
-      The application should print out the user-submitted temperature in the two remaining units.
-    </li>
-  </ul>
+  <div class="wrap">
+    <h1>
+      Temperature Converter
+    </h1>
+
+    <section class="inline-form">
+      <input type="text" id="temperature-input" placeholder="Enter temperature" />
+
+      <div id="units">
+        <select>
+          <option value="f">Fahrenheit</option>
+          <option value="c">Celsius</option>
+          <option value="k">Kelvin</option>
+        </select>
+      </div>
+
+      <button id="convert-button">Convert</button>
+    </section>
+
+    <table id="conversion-results">
+      <thead>
+        <tr>
+          <th>Fahrenheit</th>
+          <th>Celsius</th>
+          <th>Kelvin</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Conversion result will be inserted here -->
+      </tbody>
+    </table>
+  </div>
 
   <script src="script.js"></script>
 </body>
