@@ -1,84 +1,11 @@
-"user strict";
-
 (function() {
-
-  // /**
-  //  * Prompt the user for a numerical value of temperature.
-  //  * @return {Number} a numerical value of temperature.
-  //  */
-  // function propmtTemperature() {
-  //
-  //   var promptMsg = "Please enter a numerical value of temperature";
-  //
-  //   // Repeat until we get a valid value.
-  //   var isValid = false;
-  //   while ( ! isValid ) {
-  //
-  //     // Obtain the temperature from the user.
-  //     var temperature = prompt( promptMsg );
-  //
-  //     // Convert the String input into a number.
-  //     temperature = Number( temperature );
-  //
-  //     // Validate the input.
-  //     // Invalid if it is `NaN`.
-  //     if ( isValidTemperature( temperature ) ) {
-  //       isValid = true;
-  //     } else {
-  //       promptMsg = "The temperature value must be a number."
-  //     }
-  //   }
-  //
-  //   return temperature;
-  // }
-
-  /**
-   * @param  {Number}  a numeric value of temperature.
-   * @return {Boolean} true if the temperature is valid, else false.
-   */
-  function isValidTemperature( temperature ) {
-    return Number( temperature ) || temperature === '0'; // True if it's not NaN.
-  }
-
-  // /**
-  //  * Prompt the user for a unit of temperature.
-  //  * @return {String} a unit of temperature.
-  //  */
-  // function propmtUnit() {
-  //
-  //   var promptMsg = "Please enter the unit of temperature,\nF (Fahrenheit), C (Celsius) or K (Kelvin)";
-  //
-  //   var isValid = false;
-  //   while ( ! isValid ) {
-  //
-  //     // Obtain the temperature from the user.
-  //     var unit = prompt( promptMsg );
-  //
-  //     // Validate the input.
-  //     if ( isValidUnit( unit ) ) {
-  //       isValid = true;
-  //     } else {
-  //       promptMsg = "The unit must be F (Fahrenheit), C (Celsius) or K (Kelvin)."
-  //     }
-  //   } // endwhile
-  //
-  //   // Standardize on lowercase letter.
-  //   return unit.toLowerCase();
-  // }
-
-  // /**
-  //  * @param  {String}  a unit of temperature.
-  //  * @return {Boolean} true if the unit is valid, else false.
-  //  */
-  // function isValidUnit( unit ) {
-  //   return unit.length === 1 && /^[FCK]$/i.test( unit )
-  // }
+  "user strict";
 
   // Get references to elements.
-  var tempeatureElem    = document.querySelector('#temperature-input');
-  var unitElem          = document.querySelector('#units>select');
-  var submitButton      = document.querySelector('#convert-button');
-  var resultTable = document.querySelector('#conversion-results tbody');
+  var tempeatureElem = document.querySelector('#temperature-input');
+  var unitElem       = document.querySelector('#units>select');
+  var submitButton   = document.querySelector('#convert-button');
+  var resultTable    = document.querySelector('#conversion-results tbody');
 
   // Conversion table.
   // http://www.allmeasures.com/temperature.html
@@ -101,6 +28,14 @@
       'f': function(T) { return (T - 273.15) * 9/5 + 32; },
       'c': function(T) { return T - 273.15; }
     }
+  }
+
+  /**
+   * @param  {String}  a string of a numeric value of temperature.
+   * @return {Boolean} true if the temperature is valid, else false.
+   */
+  function isValidTemperature( temperature ) {
+    return Number( temperature ) || temperature === '0'; // True if it's not NaN.
   }
 
   /**
@@ -145,6 +80,21 @@
     });
   }
 
+  /**
+   * https://developer.mozilla.org/en-US/docs/Web/Guide/Events/Creating_and_triggering_events
+   * https://codepen.io/felquis/pen/damDA
+   * @param  {Object} elem  the target element.
+   * @param  {String} event the type of the event (e.g. 'click').
+   */
+  function triggerEvent( elem, event ) {
+
+    // Create the event.
+    var clickEvent = new Event( event );
+
+    // Dispatch the event.
+    elem.dispatchEvent( clickEvent );
+  }
+
   // Listen for clicks on the submit button.
   submitButton.addEventListener( 'click', function() {
 
@@ -159,7 +109,7 @@
       // Get a list of conversion results and append data to the table row.
       getTemperatureList( tempeatureElem.value, unitElem.value )
         .forEach( function( item ) {
-          console.log( item[ 0 ] + item[ 1 ] );
+          // console.log( item[ 0 ] + item[ 1 ] );
 
           // Create a new table data element.
           var tableData = document.createElement('td');
@@ -177,9 +127,13 @@
     tempeatureElem.value = '';
   });
 
-  // Execute the program.
-  // var temperatureList = getTemperatureList( propmtTemperature(), propmtUnit() );
-  // temperatureList.forEach( function( item ) {
-  //   console.log( item[ 0 ] + item[ 1 ] );
-  // });
+  // Listen for the enter key press.
+  document.body.addEventListener( 'keyup', function (e) {
+    if ( e.keyCode == 13 ) {
+      // Simulate clicking on the submit button.
+      // triggerEvent( submitButton, 'click' );
+      submitButton.click();
+    }
+  });
+
 })();
