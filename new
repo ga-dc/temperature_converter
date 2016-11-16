@@ -1,0 +1,43 @@
+
+
+let fahrenheit = 70;
+let fahrenheittemps = [];
+
+let fahrenheitToCelsius = ( fahrenheit - 32 )  / 1.8;
+let fahrenheitToKelvin = ( fahrenheit + 459.67 ) / 1.8;
+
+fahrenheitTemps.push( fahrenheit );
+fahrenheitTemps.push( fahrenheitToCelsius );
+fahrenheitTemps.push( fahrenheitToKelvin );
+
+ console.log( "Starting temperature: " + fahrenheit[0] + "F" );
+ console.log( "Converted to Celsius: " + fahrenheitToCelsius[1] + "C" );
+ console.log( "Converted to Kelvin: " + fahrenheitToKelvin[2] + "K" );
+
+ let celsius = 21;
+ let celsiustemps = [];
+
+ let celsiusToFahrenheit = celsius * 1.8 + 32;
+ let celsiusToKelvin = celsius + 273.15;
+
+ celsiusTemps.push( celsius );
+ celsiusTemps.push( celsiusToFahrenheit );
+ celsiusTemps.push( celsiusToKelvin );
+
+ console.log( "Starting temperature: " + celsius[0] + "C" );
+ console.log( "Converted to Fahrenheit: " + celsiusToFahrenheit[1] + "F" );
+ console.log( "Converted to Kelvin: " + celsiusToKelvin[2] + "K" );
+
+ let kelvin = 294;
+ let kelvinTemps = [];
+
+ let kelvinToFahrenheit = kelvin * 1.8 - 459.67;
+ let kelvinToCelsius = kelvin - 273.15;
+
+ kelvinTemps.push( kelvin );
+ kelvinTemps.push( kelvinToFahrenheit );
+ kelvinTemps.push( kelvinToCelsius );
+
+ console.log( "Starting temperature: " + kelvin[0] + "K" );
+ console.log( "Converted to Fahrenheit: " + kelvinToFahrenheit[1] + "F" );
+ console.log( "Converted to Celsius: " + kelvinToCelsius[2] + "C" );
