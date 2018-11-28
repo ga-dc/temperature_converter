@@ -15,17 +15,17 @@ var temperatureInKelvin = 0;
 temperature = parseInt(temperature);
 
 if (temperatureUnit === "Fahrenheit") {
-    temperatureInFahr = temperature;
-    temperatureInCelcius = (temperature - 32) * 5 / 9;
-    temperatureInKelvin = temperatureInCelcius + 273.15;
+    temperatureInFahr = (temperature).toFixed(2);
+    temperatureInCelcius = ((temperature - 32) * 5 / 9).toFixed(2);
+    temperatureInKelvin = (temperatureInCelcius + 273.15).toFixed(2);
 } else if (temperatureUnit === "Celcius") {
-    temperatureInFahr = (temperature * 9 / 5) + 32;
-    temperatureInCelcius = temperature;
-    temperatureInKelvin = temperatureInCelcius - 273.15;
+    temperatureInFahr = ((temperature * 9 / 5) + 32).toFixed(2);
+    temperatureInCelcius = (temperature).toFixed(2);
+    temperatureInKelvin = (temperatureInCelcius - 273.15).toFixed(2);
 } else {  // Temperature unit is Kelvin
-    temperatureInFahr = (temperature + 459.67) * 5/9;
-    temperatureInCelcius = temperature + 273.15;
-    temperatureInKelvin = temperature;
+    temperatureInFahr = ((temperature + 459.67) * 5/9).toFixed(2);
+    temperatureInCelcius = (temperature + 273.15).toFixed(2);
+    temperatureInKelvin = (temperature).toFixed(2);
 }
 console.log("Temperature in Fahrenheit : ", temperatureInFahr);
 console.log("Temperature in Celcius : ", temperatureInCelcius);
