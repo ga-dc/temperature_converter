@@ -1,12 +1,8 @@
 # Exercise: Temperature Converter
 
+![https://media.giphy.com/media/xUOxf54shCTBwOgRfG/giphy.gif](https://media.giphy.com/media/xUOxf54shCTBwOgRfG/giphy.gif)
+
 Goal: Create a program that can convert a temperature in Fahrenheit, Celsius or Kelvin to the other two units.
-
-## Setup
-
-* Create an `index.html` file.
-* Create a `script.js` file.
-* Make sure to link the script file in the `index.html`.
 
 ## Specifications
 
@@ -14,8 +10,10 @@ Goal: Create a program that can convert a temperature in Fahrenheit, Celsius or 
 
 > Your application should...
 
-* Prompt the user for a starting `temperatureInFahr`. This should be a numerical value that represents degrees in fahrenheit.
-* After receiving input it should log that same temperature in both Kelvin and Celsius.
+* Prompt the user for a starting temperature. This should be a numerical value that represents degrees in fahrenheit.
+* After receiving input it should show that same temperature in both Kelvin and Celsius.
+
+## Further: (if you get done with the above)
 
 ### Part 2
 
@@ -31,34 +29,33 @@ Goal: Create a program that can convert a temperature in Fahrenheit, Celsius or 
 
 Using Conditionals, have your code accept either fahrenheit, celsius or kelvin, and output the other two temp types.
 
-Define functions for each type of conversion to keep your code well-organized.
+Note:
 
-### Part 3 (Bonus I)
+>> You will need one other *kind* of data to be able to get input twice: world status data.
 
-Use an array to store and access the user-submitted and converted temperatures. Your array will end up looking something like this...
+>> This is a data value that changes and keeps track of the world state of your program- for instance, what step is the user in? Are they supposed to enter the temperature or the unit right now?
 
-```js
-var temps = [ STARTING_TEMP, CONVERTED_TEMP_1, CONVERTED_TEMP_2 ];
+>> You will have to store this value somewhere and alter it as needed by your program.
+
+
+
+### Part 3
+If the temperature is below 0 also print out a message like "ooh it's cold out".
+
+If the temperature is above 40 also print out a message like "ooh it's hot out".
+
+If the temperature is above 100 print out a message like "your literally boiling".
+
+### Part 4
+Also prompt the user for their name. When you output the result, suggest the type of clothing they should wear.
+
 ```
-
-> Note on naming convention: ALL_CAPS variable names are used to mark constants, or values which do not change over the course of a program's execution.
-
-You should have a line of code in that resembles the first line in the example below. Convert your all of your references to `temperature` to `STARTING_TEMP` (Use CMD+D or Find & Replace to make this easier).
-
-```js
-var temperature = prompt("Enter a temperature");
-
-// becomes
-
-var STARTING_TEMP = prompt("Enter a temperature");
+ nothing
+ swimsuit
+ shorts and shirt
+ sweater
+ sweater + jacket
+ heavy jacket
+ heavy jacket and toe warmers
+ dont go outside if you want to live
 ```
-
-When you `console.log` the temperatures, make sure you do that by accessing the values stored in the array.
-
-### Part 4 (Bonus II)
-
-Use a for or while loop to print out the conversion results for each temperature. It's OK if you need to simplify your `console.log` statements and remove strings.  
-
-### Part 5 (Bonus III)
-
-Using loops, create an interface that continues to ask the user for temp conversions until the user requests to stop.

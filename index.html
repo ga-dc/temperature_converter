@@ -1,0 +1,32 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <h1>Temperature Converter</h1>
+    <p>Please enter the Temperature Unit (eg. Celsius, Fahrenheit or Kelvin)</p>
+    <input class="starter" id="input1" placeholder="input"/>
+    <p>Please enter the Temperature</p>
+    <input class="starter" id="input2" placeholder="input"/>
+    <h2>Temperature:</h2>
+    <p class="starter" id="output"></p>
+    <script>
+      document.querySelector('#input1').addEventListener('change', function(event){
+        var currentInput = event.target.value;
+        var output = inputHappened1(currentInput);
+        display( output );
+      });
+        document.querySelector('#input2').addEventListener('change', function(event){
+        var currentInput = event.target.value;
+        var output = inputHappened2(currentInput);
+        display( output );
+      });
+
+      var display = function( data ){
+        var output = document.querySelector('#output');
+        output.innerText = data;
+      }
+    </script>
+    <script src="script.js"></script>
+  </body>
+</html>
